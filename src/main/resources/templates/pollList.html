@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polls List</title>
+    <style>
+        body, h1, table, th, td {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2em;
+            color: #007bff;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .new-poll-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .new-poll-link:hover {
+            background-color: #0056b3;
+        }
+
+        .view-button, .vote-button {
+            display: inline-block;
+            background-color: #28a745;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.875em;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .view-button:hover, .vote-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Polls List</h1>
+        <a th:href="@{/polls/create}" class="new-poll-link">Create New Poll</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Created Date</th>
+                    <th>End Date</th>
+                    <th>Active</th> 
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="poll : ${polls}">
+                    <td th:text="${poll.id}"></td>
+                    <td th:text="${poll.title}"></td>
+                    <td th:text="${poll.description}"></td>
+                    <td th:text="${poll.createdDate}"></td>
+                    <td th:text="${poll.endDate}"></td>
+                    <td th:text="${poll.isActive ? 'Yes' : 'No'}"></td>
+                    <td>
+                        <a th:href="@{/polls/imgview/{id}(id=${poll.id})}">View</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/votes/vote(pId=${poll.id})}" class="vote-button">Vote</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+ <!--   <td>
+                        <a th:if="${poll.imageBase64}" 
+                           th:href="'data:image/jpeg;base64,' + ${poll.imageBase64}" 
+                           target="_blank" 
+                           class="view-button">View</a>
+                        <span th:if="${not poll.imageBase64}">No Image</span>
+                    </td> -->

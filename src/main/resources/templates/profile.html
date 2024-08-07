@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        .profile-info {
+            margin-bottom: 20px;
+        }
+
+        .profile-info p {
+            margin: 10px 0;
+        }
+
+        .profile-info label {
+            font-weight: bold;
+            display: inline-block;
+            width: 150px;
+        }
+
+        .profile-info span {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        .button-container a {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .button-container a.edit {
+            background-color: #28a745;
+        }
+
+        .button-container a.edit:hover {
+            background-color: #218838;
+        }
+
+        .button-container a.logout {
+            background-color: #dc3545;
+        }
+
+        .button-container a.logout:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Profile</h1>
+        
+        <div class="profile-info">
+            <p><label>Username:</label> <span th:text="${user.username}"></span></p>
+            <p><label>Email:</label> <span th:text="${user.email}"></span></p>
+            <p><label>First Name:</label> <span th:text="${user.firstName}"></span></p>
+            <p><label>Last Name:</label> <span th:text="${user.lastName}"></span></p>
+            <p><label>Date of Birth:</label> <span th:text="${user.dateOfBirth}"></span></p>
+            <p><label>Address:</label> <span th:text="${user.address}"></span></p>
+            <p><label>City:</label> <span th:text="${user.city}"></span></p>
+            <p><label>State:</label> <span th:text="${user.state}"></span></p>
+            <p><label>Zip Code:</label> <span th:text="${user.zipCode}"></span></p>
+            <p><label>Phone Number:</label> <span th:text="${user.phoneNumber}"></span></p>
+        </div>
+        
+        <div class="button-container">
+            <a href="#" class="edit" th:href="@{/users/edit/{id}(id=${user.id})}">Edit Profile</a>
+            <a href="#" class="logout" th:href="@{/}">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
